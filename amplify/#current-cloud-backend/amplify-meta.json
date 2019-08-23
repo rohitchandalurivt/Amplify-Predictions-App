@@ -1,0 +1,121 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "finalpresentation-dev-20190822114014-authRole",
+			"UnauthRoleArn": "arn:aws:iam::863633314480:role/finalpresentation-dev-20190822114014-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::863633314480:role/finalpresentation-dev-20190822114014-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "finalpresentation-dev-20190822114014-deployment",
+			"UnauthRoleName": "finalpresentation-dev-20190822114014-unauthRole",
+			"StackName": "finalpresentation-dev-20190822114014",
+			"StackId": "arn:aws:cloudformation:us-east-1:863633314480:stack/finalpresentation-dev-20190822114014/47d14fd0-c50c-11e9-ab5a-12b4f4762c6a"
+		}
+	},
+	"auth": {
+		"finalpresentationa7f5accb": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/finalpresentation-dev-20190822114014-deployment/amplify-cfn-templates/auth/finalpresentationa7f5accb-cloudformation-template.yml",
+				"logicalId": "authfinalpresentationa7f5accb"
+			},
+			"lastPushTimeStamp": "2019-08-22T18:52:55.006Z",
+			"output": {
+				"AppClientSecret": "1d6bfdgn2sc553flgvf2l1s3rqr9o0104olls5grb9cuimcj0avd",
+				"UserPoolId": "us-east-1_4gfvrx1GR",
+				"AppClientIDWeb": "4kdjfgurtjvbsgv8acq6dlb0ul",
+				"AppClientID": "3b2pefoii21vvrc26l5oq19qbd",
+				"IdentityPoolId": "us-east-1:66d928be-5358-4467-8b8c-2cd47c448302",
+				"IdentityPoolName": "finalpresentationa7f5accb_identitypool_a7f5accb__dev",
+				"UserPoolName": "finalpresentationa7f5accb_userpool_a7f5accb"
+			},
+			"lastPushDirHash": "oxfzVXlVk6+MNWLGWvPqhREA4Rw="
+		}
+	},
+	"function": {
+		"RekognitionIndexFacesTrigger2841c805": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"lastBuildTimeStamp": "2019-08-22T18:49:49.127Z",
+			"lastPackageTimeStamp": "2019-08-22T18:49:49.164Z",
+			"distZipFilename": "RekognitionIndexFacesTrigger2841c805-50427154413278445466-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/finalpresentation-dev-20190822114014-deployment/amplify-cfn-templates/function/RekognitionIndexFacesTrigger2841c805-cloudformation-template.json",
+				"logicalId": "functionRekognitionIndexFacesTrigger2841c805"
+			},
+			"lastPushTimeStamp": "2019-08-22T18:52:55.006Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:863633314480:function:RekognitionIndexFacesTrigger2841c805-dev",
+				"Name": "RekognitionIndexFacesTrigger2841c805-dev",
+				"LambdaExecutionRole": "RekognitionIndexFacesTrigger2841c805LambdaRole2841c805-dev"
+			},
+			"lastPushDirHash": "X4OqUaKG7F21KlM8bNgaHRMxNyI="
+		}
+	},
+	"storage": {
+		"s33adda91d": {
+			"providerPlugin": "awscloudformation",
+			"service": "S3",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "RekognitionIndexFacesTrigger2841c805",
+					"attributes": [
+						"Name",
+						"Arn",
+						"LambdaExecutionRole"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/finalpresentation-dev-20190822114014-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"logicalId": "storages33adda91d"
+			},
+			"lastPushTimeStamp": "2019-08-22T18:52:55.006Z",
+			"output": {
+				"BucketName": "finalbucket-dev",
+				"Region": "us-east-1"
+			},
+			"lastPushDirHash": "NLrr5Lwh8tiNp2ATByiNLFSOC3M="
+		}
+	},
+	"predictions": {
+		"identifyEntitiesd717ae69": {
+			"providerPlugin": "awscloudformation",
+			"service": "Rekognition",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "RekognitionIndexFacesTrigger2841c805",
+					"attributes": [
+						"Name",
+						"Arn",
+						"LambdaExecutionRole"
+					]
+				},
+				{
+					"category": "storage",
+					"resourceName": "s33adda91d",
+					"attributes": [
+						"BucketName"
+					]
+				}
+			],
+			"identifyType": "identifyEntities",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/finalpresentation-dev-20190822114014-deployment/amplify-cfn-templates/predictions/identifyEntitiesd717ae69-template.json",
+				"logicalId": "predictionsidentifyEntitiesd717ae69"
+			},
+			"lastPushTimeStamp": "2019-08-22T18:52:55.006Z",
+			"output": {
+				"maxEntities": "50",
+				"celebrityDetectionEnabled": "true",
+				"region": "us-east-1",
+				"collectionId": "identifyEntitiesd717ae69-dev"
+			},
+			"lastPushDirHash": "5sAf2zCHlHZLKLWwcLF+IJkshog="
+		}
+	}
+}

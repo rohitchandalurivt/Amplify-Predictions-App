@@ -1,0 +1,57 @@
+{
+	"auth": {
+		"finalpresentationa7f5accb": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"RekognitionIndexFacesTrigger2841c805": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"storage": {
+		"s33adda91d": {
+			"providerPlugin": "awscloudformation",
+			"service": "S3",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "RekognitionIndexFacesTrigger2841c805",
+					"attributes": [
+						"Name",
+						"Arn",
+						"LambdaExecutionRole"
+					]
+				}
+			]
+		}
+	},
+	"predictions": {
+		"identifyEntitiesd717ae69": {
+			"providerPlugin": "awscloudformation",
+			"service": "Rekognition",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "RekognitionIndexFacesTrigger2841c805",
+					"attributes": [
+						"Name",
+						"Arn",
+						"LambdaExecutionRole"
+					]
+				},
+				{
+					"category": "storage",
+					"resourceName": "s33adda91d",
+					"attributes": [
+						"BucketName"
+					]
+				}
+			],
+			"identifyType": "identifyEntities"
+		}
+	}
+}
