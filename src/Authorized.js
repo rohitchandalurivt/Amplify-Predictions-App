@@ -4,10 +4,6 @@ AWS.config.update({
     region: "us-east-1"
 });
 
-// 'AKIA4SFE
-//OSKYPOYHBH4W', 
- // "NhKz04jDyVvb7Dwu/oFb77mhjoS4rncKoMsszhJR"
-
 function Authorized() {
 
     let keys = getObjects().then((keys) => {
